@@ -1,0 +1,219 @@
+:root {
+  --bg1: #2a0f2e;
+  --bg2: #5a1a4a;
+  --bg3: #c2446b;
+  --card: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.22);
+  --text: #fff5f8;
+  --muted: #f3c9d8;
+  --yes: #ff4d79;
+  --yes-hover: #ff2e63;
+  --no: rgba(255, 255, 255, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: linear-gradient(160deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+  background-attachment: fixed;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* Falling hearts */
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.heart {
+  position: absolute;
+  top: -10vh;
+  opacity: 0;
+  animation: fall linear forwards;
+  will-change: transform, opacity;
+}
+@keyframes fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.85; }
+  100% { transform: translateY(115vh) rotate(260deg); opacity: 0; }
+}
+
+/* Card */
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 520px);
+  text-align: center;
+  padding: 36px 26px 30px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  animation: rise 0.7s ease both;
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.big-emoji {
+  font-size: 4.2rem;
+  line-height: 1;
+  margin-bottom: 8px;
+  display: inline-block;
+  animation: bob 3s ease-in-out infinite;
+}
+.big-emoji.pop { animation: pop 0.8s cubic-bezier(.2, 1.6, .4, 1) both; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pop {
+  from { transform: scale(0) rotate(-20deg); }
+  to   { transform: scale(1) rotate(0); }
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 6.5vw, 2.7rem);
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+.sub {
+  margin: 0 auto 26px;
+  max-width: 38ch;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  min-height: 70px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 30px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:focus-visible, .plan:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.btn.yes {
+  background: var(--yes);
+  box-shadow: 0 8px 24px rgba(255, 77, 121, 0.45);
+  transform-origin: center;
+}
+.btn.yes:hover:not(:disabled) { background: var(--yes-hover); }
+.btn.yes:active:not(:disabled) { transform: scale(0.97); }
+.btn.yes:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: none; }
+
+.btn.no {
+  background: var(--no);
+  border: 1px solid var(--card-border);
+}
+.btn.no.dodging {
+  position: fixed;
+  z-index: 5;
+  transition: left 0.25s ease, top 0.25s ease, transform 0.15s ease;
+}
+.btn.yes.mega {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  font-size: clamp(2rem, 9vw, 4rem);
+}
+
+.hint {
+  margin: 22px 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  min-height: 1.2em;
+}
+
+/* Plans */
+.plans {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0 0 22px;
+}
+.plan {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--no);
+  border: 1.5px solid var(--card-border);
+  border-radius: 16px;
+  padding: 14px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.plan:hover { background: rgba(255, 255, 255, 0.24); }
+.plan[aria-checked="true"] {
+  background: rgba(255, 77, 121, 0.4);
+  border-color: #fff;
+  transform: scale(1.03);
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  top: -5vh;
+  z-index: 20;
+  pointer-events: none;
+  animation: confetti linear forwards;
+}
+@keyframes confetti {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0.9; }
+}
+
+@media (max-width: 420px) {
+  .plans { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart, .confetti { display: none; }
+  .big-emoji, .card { animation: none; }
+}
