@@ -3,6 +3,8 @@
 A tiny, playful web page that asks one question: **"Will you be my Valentine?"**
 Anyone can make their own version in seconds: type your name and hers, get a link, send it.
 
+### 👉 Live site: https://djsergio88.github.io/V-Day-from-me/
+
 ## How it works
 
 1. Open the **link maker** (the site's home page).
@@ -33,7 +35,7 @@ style.css    the look: gradient, glass card, falling hearts, animations
 The question page reads two names from the link:
 
 ```
-https://djsergio88.github.io/V-Day-from-Sergjo/ask.html?from=YourName&to=HerName
+https://djsergio88.github.io/V-Day-from-me/ask.html?from=YourName&to=HerName
 ```
 
 The link maker builds this for you. Names are limited to 30 characters and are always shown as plain text.
@@ -61,7 +63,7 @@ Open `index.html` in a browser. That's it.
 1. Push these files to the repo's `main` branch.
 2. Go to **Settings → Pages**.
 3. Under **Build and deployment**, choose **Deploy from a branch**, select `main` and `/ (root)`, then **Save**.
-4. After a minute or two it's live at `https://djsergio88.github.io/V-Day-from-Sergjo/`.
+4. After a minute or two it's live at `https://djsergio88.github.io/V-Day-from-me/`.
 
 The repo needs to be public for Pages on a free GitHub account.
 
