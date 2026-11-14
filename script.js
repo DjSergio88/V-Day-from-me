@@ -100,7 +100,9 @@ function onNo(e) {
   hint.textContent = "";
 
   // Yes grows every time.
-  yesScale *= CONFIG.growthPerNo;
+  // Capped so it never grows wider than the card (the full-screen takeover comes at the end).
+  const maxScale = Math.max(1, Math.min(2.4, (askView.clientWidth - 48) / yesBtn.offsetWidth));
+  yesScale = Math.min(yesScale * CONFIG.growthPerNo, maxScale);
   yesBtn.style.transform = `scale(${yesScale.toFixed(3)})`;
   yesBtn.style.margin = `${(yesScale - 1) * 14}px ${(yesScale - 1) * 26}px`;
 
