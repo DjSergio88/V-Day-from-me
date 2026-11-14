@@ -1,11 +1,12 @@
 /* =========================================================
-   V-Day from Sergjo
-   Edit the CONFIG block below to make it yours.
-   Tip: share the link as  https://<you>.github.io/V-Day-from-Sergjo/?to=HerName
-   and her name will show up on the page.
+   V-Day from Sergjo: the question page (ask.html)
+   Names come from the link:  ask.html?from=Sergjo&to=Ana
+   Use index.html (the link maker) to build those links.
+   Edit the CONFIG block below to change the messages.
    ========================================================= */
 
 const CONFIG = {
+  // Default sender name, used only if the link has no ?from=
   from: "Sergjo",
 
   // Messages the "No" button cycles through as she keeps trying it.
@@ -47,9 +48,13 @@ const heartsLayer = $("hearts");
 const sendBtn = $("sendBtn");
 const sendHint = $("sendHint");
 
-/* ---------- personalise from ?to=Name ---------- */
+/* ---------- personalise from ?from=Name&to=Name ---------- */
+const cleanName = (s) => (s || "").replace(/[\u0000-\u001f\u007f<>]/g, "").trim().slice(0, 30);
 const params = new URLSearchParams(location.search);
-const herName = (params.get("to") || "").trim().slice(0, 30);
+const herName = cleanName(params.get("to"));
+const fromName = cleanName(params.get("from")) || CONFIG.from;
+$("fromName").textContent = fromName;
+document.title = `A little question from ${fromName} 💌`;
 if (herName) {
   title.textContent = `${herName}, will you be my Valentine?`;
   $("yesTitle").textContent = `${herName} said yes!`;
@@ -167,7 +172,7 @@ planButtons.forEach((btn) =>
     btn.setAttribute("aria-checked", "true");
     chosenPlan = btn.dataset.plan;
     sendBtn.disabled = false;
-    sendBtn.textContent = `Tell ${CONFIG.from} 💌`;
+    sendBtn.textContent = `Tell ${fromName} 💌`;
   })
 );
 
@@ -188,8 +193,8 @@ sendBtn.addEventListener("click", async () => {
 
   try {
     await navigator.clipboard.writeText(text);
-    sendHint.textContent = `Copied! Paste it in a message to ${CONFIG.from}. 💕`;
+    sendHint.textContent = `Copied! Paste it in a message to ${fromName}. 💕`;
   } catch (err) {
-    sendHint.textContent = `Just text ${CONFIG.from}: "${text}"`;
+    sendHint.textContent = `Just text ${fromName}: "${text}"`;
   }
 });

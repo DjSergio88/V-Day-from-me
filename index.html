@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A Question from Sergjo 💌</title>
-  <meta name="description" content="A small question, asked properly." />
+  <title>V-Day Link Maker 💌</title>
+  <meta name="description" content="Type your name and hers. Get a link. Send it." />
+  <meta property="og:title" content="V-Day Link Maker 💌" />
+  <meta property="og:description" content="Type your name and hers. Get a link. Send it." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -13,38 +16,37 @@
 <body>
   <div class="hearts" id="hearts" aria-hidden="true"></div>
 
-  <!-- ASK VIEW -->
-  <main class="card" id="askView">
-    <div class="big-emoji" id="emoji" aria-hidden="true">🌹</div>
-    <p class="eyebrow">A little note from Sergjo</p>
-    <h1 id="title">Will you be my Valentine?</h1>
-    <p class="sub" id="sub">I could have just texted you, but this felt more fun.</p>
+  <main class="card" id="makeView">
+    <div class="big-emoji" aria-hidden="true">💌</div>
+    <p class="eyebrow">V-Day Link Maker</p>
+    <h1>Ask her out. In style.</h1>
+    <p class="sub">Type your name and hers. You get a link. Send it to her. Only the names change, everything else is already done.</p>
 
-    <div class="buttons" id="buttons">
-      <button class="btn yes" id="yesBtn" type="button">Yes 💖</button>
-      <button class="btn no" id="noBtn" type="button">No</button>
-    </div>
+    <form id="makeForm" novalidate>
+      <label class="field">
+        <span>Your name (the one asking)</span>
+        <input id="fromInput" type="text" maxlength="30" autocomplete="given-name" placeholder="e.g. Sergjo" />
+      </label>
+      <label class="field">
+        <span>Her name</span>
+        <input id="toInput" type="text" maxlength="30" autocomplete="off" placeholder="e.g. Ana" />
+      </label>
+      <button class="btn yes" type="submit">Make my link 💖</button>
+      <p class="hint" id="formHint" role="alert"></p>
+    </form>
 
-    <p class="hint" id="hint">(Take your time. The "No" button is a bit shy.)</p>
+    <section class="result hidden" id="result">
+      <p class="eyebrow">Your link is ready</p>
+      <input id="linkOut" type="text" readonly aria-label="Your link" />
+      <div class="row">
+        <button class="btn small" id="copyBtn" type="button">Copy</button>
+        <button class="btn small" id="shareBtn" type="button">Share</button>
+        <a class="btn small" id="previewLink" href="ask.html" target="_blank" rel="noopener">Preview</a>
+      </div>
+      <p class="hint" id="resultHint"></p>
+    </section>
   </main>
 
-  <!-- YES VIEW -->
-  <main class="card hidden" id="yesView" aria-live="polite">
-    <div class="big-emoji pop" aria-hidden="true">🥰</div>
-    <h1 id="yesTitle">She said yes!</h1>
-    <p class="sub">You just made my whole week. Now the important part: what's the plan?</p>
-
-    <div class="plans" id="plans" role="radiogroup" aria-label="Pick a date plan">
-      <button type="button" class="plan" role="radio" aria-checked="false" data-plan="a cozy dinner 🍝">🍝 Cozy dinner</button>
-      <button type="button" class="plan" role="radio" aria-checked="false" data-plan="coffee and a long walk ☕">☕ Coffee + walk</button>
-      <button type="button" class="plan" role="radio" aria-checked="false" data-plan="a movie night 🎬">🎬 Movie night</button>
-      <button type="button" class="plan" role="radio" aria-checked="false" data-plan="a surprise (your pick, my plan) 🎁">🎁 Surprise me</button>
-    </div>
-
-    <button class="btn yes send" id="sendBtn" type="button" disabled>Pick a plan first</button>
-    <p class="hint" id="sendHint"></p>
-  </main>
-
-  <script src="script.js"></script>
+  <script src="create.js"></script>
 </body>
 </html>
